@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>All Tools Mypiey</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Poppins,sans-serif;
+  background:#160914;
+  color:#fff;
+  overflow-x:hidden;
+}
+
+.fredoka{
+  font-family:Fredoka,sans-serif;
+}
+
+/* VIDEO BACKGROUND */
+.video-bg{
+  position:fixed;
+  inset:0;
+  z-index:-10;
+  overflow:hidden;
+}
+
+.video-bg video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.video-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,20,115,.72),
+      rgba(74,5,48,.72),
+      rgba(255,105,170,.45)
+    );
+}
+
+.video-dark{
+  position:absolute;
+  inset:0;
+  background:rgba(10,3,10,.35);
+}
+
+/* GLASS */
+.glass{
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.20);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.25),
+    inset 0 1px rgba(255,255,255,.15);
+}
+
+/* GLOW */
+.pink-glow{
+  text-shadow:
+    0 0 10px rgba(255,70,150,.8),
+    0 0 35px rgba(255,20,120,.7);
+}
+
+.box-glow{
+  box-shadow:
+    0 0 25px rgba(255,45,130,.18),
+    0 15px 50px rgba(0,0,0,.25);
+}
+
+/* CARDS */
+.tool-card{
+  transition:.35s ease;
+}
+
+.tool-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(255,150,205,.65);
+  box-shadow:
+    0 0 35px rgba(255,40,140,.25),
+    0 25px 60px rgba(0,0,0,.3);
+}
+
+/* INPUT */
+.input{
+  width:100%;
+  background:rgba(255,255,255,.94);
+  color:#351326;
+  border:none;
+  outline:none;
+  border-radius:16px;
+  padding:14px 16px;
+  font-size:14px;
+  transition:.2s;
+}
+
+.input:focus{
+  box-shadow:0 0 0 3px rgba(255,80,160,.35);
+}
+
+/* BUTTON */
+.btn{
+  border:none;
+  cursor:pointer;
+  transition:.25s;
+  font-weight:700;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  filter:brightness(1.08);
+}
+
+.btn:active{
+  transform:scale(.97);
+}
+
+/* PLATFORM ICON */
+.platform-icon{
+  width:52px;
+  height:52px;
+  border-radius:17px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  flex-shrink:0;
+}
+
+/* SAKURA */
+.sakura{
+  position:fixed;
+  top:-40px;
+  pointer-events:none;
+  z-index:20;
+  animation:sakuraFall linear forwards;
+}
+
+@keyframes sakuraFall{
+  0%{
+    transform:translateY(-30px) rotate(0deg);
+    opacity:0;
+  }
+  10%{
+    opacity:1;
+  }
+  100%{
+    transform:translateY(110vh) rotate(720deg);
+    opacity:.2;
+  }
+}
+
+/* PARTICLES */
+.particle{
+  position:fixed;
+  width:4px;
+  height:4px;
+  border-radius:50%;
+  background:#ffb3d7;
+  box-shadow:0 0 15px #ff4c9a;
+  pointer-events:none;
+  z-index:-1;
+  animation:particleFloat linear infinite;
+}
+
+@keyframes particleFloat{
+  0%{
+    transform:translateY(110vh);
+    opacity:0;
+  }
+  20%{
+    opacity:.8;
+  }
+  100%{
+    transform:translateY(-20vh);
+    opacity:0;
+  }
+}
+
+/* HERO */
+.hero-title{
+  animation:heroIn .9s ease both;
+}
+
+.hero-sub{
+  animation:heroIn 1.1s ease both;
+}
+
+@keyframes heroIn{
+  from{
+    opacity:0;
+    transform:translateY(25px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* TOAST */
+.toast{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:100;
+  min-width:280px;
+  max-width:calc(100vw - 40px);
+  padding:15px 18px;
+  border-radius:17px;
+  background:rgba(25,8,20,.9);
+  border:1px solid rgba(255,120,180,.4);
+  backdrop-filter:blur(15px);
+  box-shadow:0 15px 50px rgba(0,0,0,.35);
+  transform:translateX(130%);
+  transition:.35s;
+}
+
+.toast.show{
+  transform:translateX(0);
+}
+
+/* MODAL */
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:90;
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal.show{
+  display:flex;
+}
+
+.modal-box{
+  width:100%;
+  max-width:480px;
+  animation:modalIn .3s ease;
+}
+
+@keyframes modalIn{
+  from{
+    opacity:0;
+    transform:scale(.9) translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+/* SPINNER */
+.spinner{
+  width:35px;
+  height:35px;
+  border:4px solid rgba(255,255,255,.2);
+  border-top-color:#ff4c9a;
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+  margin:auto;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+/* MOBILE */
+@media(max-width:640px){
+  .hero-title{
+    font-size:3.5rem;
+  }
+
+  .nav-links{
+    display:none;
+  }
+
+  .tool-card{
+    border-radius:25px;
+  }
+
+  .toast{
+    top:12px;
+    right:12px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ================= VIDEO BACKGROUND ================= -->
+
+<div class="video-bg">
+
+  <video autoplay muted loop playsinline>
+    <source src="https://files.catbox.moe/dxtyuc.mp4" type="video/mp4">
+  </video>
+
+  <div class="video-overlay"></div>
+  <div class="video-dark"></div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
+
+<div id="toast" class="toast">
+  <div id="toastText" class="font-semibold text-sm"></div>
+</div>
+
+
+<!-- ================= MODAL ================= -->
+
+<div id="modal" class="modal">
+
+  <div class="modal-box glass rounded-[28px] p-6">
+
+    <div class="flex justify-between items-center mb-5">
+
+      <h3 class="fredoka text-2xl">
+        <span id="modalPlatform">Tool</span>
+      </h3>
+
+      <button
+        onclick="closeModal()"
+        class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20">
+        ✕
+      </button>
+
+    </div>
+
+    <div id="modalContent">
+
+      <div class="text-center py-8">
+
+        <div class="spinner mb-5"></div>
+
+        <p class="font-semibold">
+          Processing...
+        </p>
+
+        <p class="text-xs text-white/60 mt-2">
+          Demo interface sedang memproses URL.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= SAKURA ================= -->
+
+<div id="sakuraContainer"></div>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="fixed top-0 left-0 right-0 z-50 p-4">
+
+  <div class="glass max-w-6xl mx-auto rounded-full px-5 py-3 flex items-center justify-between">
+
+    <a href="#" class="fredoka text-xl font-bold">
+      🌸
+      <span class="text-white">All Tools</span>
+      <span class="text-pink-300">Mypiey</span>
+    </a>
+
+    <div class="nav-links flex items-center gap-6 text-sm font-semibold">
+
+      <a href="#home" class="hover:text-pink-300 transition">
+        Home
+      </a>
+
+      <a href="#tools" class="hover:text-pink-300 transition">
+        Tools
+      </a>
+
+      <a href="#about" class="hover:text-pink-300 transition">
+        About
+      </a>
+
+    </div>
+
+    <button
+      onclick="toggleMusic()"
+      id="musicButton"
+      class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 transition">
+      🎵
+    </button>
+
+  </div>
+
+</nav>
+
+
+<!-- ================= HERO ================= -->
+
+<section
+  id="home"
+  class="min-h-screen flex items-center justify-center px-5 pt-24">
+
+  <div class="text-center max-w-4xl">
+
+    <div class="glass inline-block px-5 py-2 rounded-full mb-6">
+      <span class="text-xs font-bold tracking-widest text-pink-200">
+        🌸 ANIME MEDIA TOOLKIT
+      </span>
+    </div>
+
+    <h1
+      class="hero-title fredoka text-6xl sm:text-7xl md:text-9xl font-bold leading-[.85] pink-glow">
+
+      ALL TOOLS<br>
+
+      <span class="text-pink-200">
+        MYPIEY
+      </span>
+
+    </h1>
+
+    <p
+      class="hero-sub mt-7 text-white/85 text-sm sm:text-base max-w-xl mx-auto">
+
+      Satu tempat untuk berbagai kebutuhan media.
+      Pilih platform, masukkan URL, lalu proses melalui
+      layanan backend yang tersedia.
+
+    </p>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-3">
+
+      <a
+        href="#tools"
+        class="btn bg-gradient-to-r from-pink-500 to-fuchsia-500 px-7 py-3 rounded-full shadow-lg shadow-pink-500/30">
+
+        🚀 EXPLORE TOOLS
+
+      </a>
+
+      <a
+        href="#about"
+        class="btn glass px-7 py-3 rounded-full">
+
+        ABOUT
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= TOOLS ================= -->
+
+<section
+  id="tools"
+  class="max-w-6xl mx-auto px-5 py-20">
+
+  <div class="text-center mb-12">
+
+    <p class="text-pink-300 text-xs font-bold tracking-[.3em]">
+      MEDIA DOWNLOADER
+    </p>
+
+    <h2 class="fredoka text-4xl sm:text-5xl font-bold mt-2">
+      Choose Your Tool
+    </h2>
+
+    <p class="text-white/60 text-sm mt-3">
+      Pilih platform yang ingin kamu proses.
+    </p>
+
+  </div>
+
+
+  <!-- TOOL GRID -->
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+
+    <!-- ================= TIKTOK ================= -->
+
+    <div class="tool-card glass rounded-[30px] p-6 box-glow">
+
+      <div class="flex items-center gap-4">
+
+        <div class="platform-icon bg-black">
+          ♪
+        </div>
+
+        <div>
+
+          <h3 class="fredoka text-2xl">
+            TIKTOK
+          </h3>
+
+          <p class="text-[10px] text-pink-300 font-bold tracking-wider">
+            VIDEO DOWNLOADER
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <p class="text-xs text-white/60 mt-4 leading-relaxed">
+
+        Proses URL video TikTok melalui backend/API
+        yang kompatibel.
+
+      </p>
+
+
+      <input
+        id="tiktokUrl"
+        class="input mt-5"
+        type="url"
+        placeholder="Paste link TikTok..." />
+
+
+      <div class="grid grid-cols-2 gap-2 mt-3">
+
+        <button
+          onclick="processTool('TikTok')"
+          class="btn bg-black py-3 rounded-xl text-xs">
+
+          FETCH VIDEO
+
+        </button>
+
+        <button
+          onclick="clearInput('tiktokUrl')"
+          class="btn bg-white/10 py-3 rounded-xl text-xs">
+
+          CLEAR
+
+        </button>
+
+      </div>
+
+      <div class="flex gap-2 mt-4">
+
+        <span class="bg-white/10 px-3 py-1.5 rounded-full text-[10px]">
+          MP4
+        </span>
+
+        <span class="bg-white/10 px-3 py-1.5 rounded-full text-[10px]">
+          HD
+        </span>
+
+        <span class="bg-white/10 px-3 py-1.5 rounded-full text-[10px]">
+          VIDEO
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= INSTAGRAM ================= -->
+
+    <div class="tool-card glass rounded-[30px] p-6 box-glow">
+
+      <div class="flex items-center gap-4">
+
+        <div
+          class="platform-icon bg-gradient-to-br from-yellow-300 via-pink-500 to-purple-600">
+
+          ◎
+
+        </div>
+
+        <div>
+
+          <h3 class="fredoka text-2xl">
+            INSTAGRAM
+          </h3>
+
+          <p class="text-[10px] text-pink-300 font-bold tracking-wider">
+            PHOTO & VIDEO
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <p class="text-xs text-white/60 mt-4 leading-relaxed">
+
+        Proses media publik Instagram melalui
+        backend/API yang kompatibel.
+
+      </p>
+
+
+      <input
+        id="instagramUrl"
+        class="input mt-5"
+        type="url"
+        placeholder="Paste link Instagram..." />
+
+
+      <div class="grid grid-cols-2 gap-2 mt-3">
+
+        <button
+          onclick="processTool('Instagram')"
+          class="btn bg-gradient-to-r from-pink-500 to-purple-600 py-3 rounded-xl text-xs">
+
+          FETCH MEDIA
+
+        </button>
+
+        <button
+          onclick="clearInput('instagramUrl')"
+          class="btn bg-white/10 py-3 rounded-xl text-xs">
+
+          CLEAR
+
+        </button>
+
+      </div>
+
+
+      <div class="flex gap-2 mt-4">
+
+        <span class="bg-white/10 px-3 py-1.5 rounded-full text-[10px]">
+          PHOTO
+        </span>
+
+        <span class="bg-white/10 px-3 py-1.5 rounded-full text-[10px]">
+          VIDEO
+        </span>
+
+        <span class="bg-white/10 px-3 py-1.5 rounded-full text-[10px]">
+          HD
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- ================= YOUTUBE ================= -->
+
+    <div class="tool-card glass rounded-[30px] p-6 box-glow">
+
+      <div class="flex items-center gap-4">
+
+        <div class="platform-icon bg-red-600">
+          ▶
+        </div>
+
+        <div>
+
+          <h3 class="fredoka text-2xl">
+            YOUTUBE
+          </h3>
+
+          <p class="text-[10px] text-pink-300 font-bold tracking-wider">
+            VIDEO & AUDIO
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <p class="text-xs text-white/60 mt-4 leading-relaxed">
+
+        Pilih format video atau audio berdasarkan
+        format yang tersedia dari backend.
+
+      </p>
+
+
+      <input
+        id="youtubeUrl"
+        class="input mt-5"
+        type="url"
+        placeholder="Paste link YouTube..." />
+
+
+      <div class="grid grid-cols-2 gap-2 mt-3">
+
+        <button
+          onclick="processTool('YouTube')"
+          class="btn bg-red-600 py-3 rounded-xl text-xs">
+
+          FETCH VIDEO
+
+        </button>
+
+        <button
+          onclick="clearInput('youtubeUrl')"
+          class="btn bg-white/10 py-3 rounded-xl text-xs">
+
+          CLEAR
+
+        </button>
+
+      </div>
+
+
+      <div class="flex gap-2 mt-4">
+
+        <span class="bg-white/10 px-3 py-1.5 rounded-full text-[10px]">
+          MP4
+        </span>
+
+        <span class="bg-white/10 px-3 py-1.5 rounded-full text-[10px]">
+          AUDIO
+        </span>
+
+        <span class="bg-white/10 px-3 py-1.5 rounded-full text-[10px]">
+          HD
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= HISTORY ================= -->
+
+  <div class="glass rounded-[30px] mt-8 p-6">
+
+    <div class="flex flex-wrap items-center justify-between gap-4">
+
+      <div>
+
+        <h3 class="fredoka text-2xl">
+          Recent Activity
+        </h3>
+
+        <p class="text-xs text-white/50">
+          Riwayat URL yang diproses di perangkat ini.
+        </p>
+
+      </div>
+
+      <button
+        onclick="clearHistory()"
+        class="btn bg-white/10 hover:bg-red-500/30 px-4 py-2 rounded-xl text-xs">
+
+        CLEAR HISTORY
+
+      </button>
+
+    </div>
+
+
+    <div id="historyList" class="mt-5 space-y-2"></div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section
+  id="about"
+  class="max-w-5xl mx-auto px-5 py-24">
+
+  <div class="glass rounded-[35px] p-8 md:p-12 text-center">
+
+    <div class="text-4xl mb-4">
+      🌸
+    </div>
+
+    <h2 class="fredoka text-4xl font-bold">
+      About All Tools Mypiey
+    </h2>
+
+    <p class="text-sm text-white/60 max-w-2xl mx-auto mt-5 leading-7">
+
+      All Tools Mypiey adalah dashboard tools media
+      dengan tampilan anime-inspired yang dibuat sederhana,
+      cepat, dan nyaman digunakan dari perangkat mobile.
+
+    </p>
+
+
+    <div class="grid grid-cols-3 gap-3 max-w-xl mx-auto mt-8">
+
+      <div class="bg-white/5 rounded-2xl p-4">
+
+        <b class="fredoka text-2xl">
+          03
+        </b>
+
+        <p class="text-[9px] text-white/50 mt-1">
+          PLATFORMS
+        </p>
+
+      </div>
+
+
+      <div class="bg-white/5 rounded-2xl p-4">
+
+        <b class="fredoka text-2xl">
+          FAST
+        </b>
+
+        <p class="text-[9px] text-white/50 mt-1">
+          INTERFACE
+        </p>
+
+      </div>
+
+
+      <div class="bg-white/5 rounded-2xl p-4">
+
+        <b class="fredoka text-2xl">
+          100%
+        </b>
+
+        <p class="text-[9px] text-white/50 mt-1">
+          RESPONSIVE
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="border-t border-white/10">
+
+  <div class="max-w-6xl mx-auto px-5 py-8">
+
+    <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+
+      <div>
+
+        <div class="fredoka font-bold text-xl">
+          🌸 All Tools Mypiey
+        </div>
+
+        <p class="text-xs text-white/40 mt-1">
+          Anime-inspired media toolkit.
+        </p>
+
+      </div>
+
+
+      <div class="flex gap-5 text-xs text-white/50">
+
+        <a href="#home" class="hover:text-white">
+          Home
+        </a>
+
+        <a href="#tools" class="hover:text-white">
+          Tools
+        </a>
+
+        <a href="#about" class="hover:text-white">
+          About
+        </a>
+
+      </div>
+
+    </div>
+
+
+    <div class="text-center text-[10px] text-white/30 mt-7">
+
+      © 2026 All Tools Mypiey
+
+    </div>
+
+  </div>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+/* =========================================
+   TOAST
+========================================= */
+
+function toast(message){
+
+  const toast = document.getElementById("toast");
+  const text = document.getElementById("toastText");
+
+  text.innerText = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(() => {
+
+    toast.classList.remove("show");
+
+  },3000);
+
+}
+
+
+/* =========================================
+   GET INPUT
+========================================= */
+
+function getInput(platform){
+
+  if(platform === "TikTok"){
+    return document.getElementById("tiktokUrl");
+  }
+
+  if(platform === "Instagram"){
+    return document.getElementById("instagramUrl");
+  }
+
+  if(platform === "YouTube"){
+    return document.getElementById("youtubeUrl");
+  }
+
+}
+
+
+/* =========================================
+   PROCESS TOOL
+========================================= */
+
+function processTool(platform){
+
+  const input = getInput(platform);
+
+  const url = input.value.trim();
+
+  if(!url){
+
+    toast("⚠️ Masukkan URL terlebih dahulu.");
+
+    input.focus();
+
+    return;
+
+  }
+
+
+  try{
+
+    new URL(url);
+
+  }catch{
+
+    toast("❌ URL tidak valid.");
+
+    return;
+
+  }
+
+
+  saveHistory(platform,url);
+
+  openModal(platform,url);
+
+}
+
+
+/* =========================================
+   MODAL
+========================================= */
+
+function openModal(platform,url){
+
+  const modal = document.getElementById("modal");
+
+  const title = document.getElementById("modalPlatform");
+
+  const content = document.getElementById("modalContent");
+
+  title.innerText = platform;
+
+  modal.classList.add("show");
+
+
+  content.innerHTML = `
+
+    <div class="text-center py-7">
+
+      <div class="spinner mb-5"></div>
+
+      <p class="font-semibold">
+        Processing ${platform}...
+      </p>
+
+      <p class="text-xs text-white/50 mt-2">
+        Checking URL...
+      </p>
+
+    </div>
+
+  `;
+
+
+  setTimeout(() => {
+
+    showDemoResult(platform,url);
+
+  },1200);
+
+}
+
+
+/* =========================================
+   DEMO RESULT
+========================================= */
+
+function showDemoResult(platform,url){
+
+  const content = document.getElementById("modalContent");
+
+  content.innerHTML = `
+
+    <div>
+
+      <div class="rounded-2xl bg-gradient-to-br from-pink-500/30 to-purple-500/20
+                  border border-white/10 p-5 mb-5">
+
+        <div class="text-4xl mb-3">
+          ${platform === "TikTok" ? "♪" :
+            platform === "Instagram" ? "◎" : "▶"}
+        </div>
+
+        <p class="font-semibold">
+          ${platform} Media
+        </p>
+
+        <p class="text-xs text-white/50 mt-1 break-all">
+          ${escapeHtml(url)}
+        </p>
+
+      </div>
+
+
+      <div class="grid grid-cols-2 gap-3">
+
+        <div>
+
+          <label class="text-[10px] text-white/50">
+            FORMAT
+          </label>
+
+          <select
+            id="formatSelect"
+            class="input mt-1">
+
+            <option>MP4</option>
+            <option>MP3</option>
+
+          </select>
+
+        </div>
+
+
+        <div>
+
+          <label class="text-[10px] text-white/50">
+            QUALITY
+          </label>
+
+          <select
+            class="input mt-1">
+
+            <option>AUTO</option>
+            <option>HD</option>
+            <option>SD</option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+
+      <button
+        onclick="demoDownload()"
+        class="btn w-full mt-4 py-4 rounded-2xl
+               bg-gradient-to-r from-pink-500 to-fuchsia-600">
+
+        ↓ DOWNLOAD
+
+      </button>
+
+
+      <p class="text-[10px] text-white/40 text-center mt-4 leading-5">
+
+        Demo mode aktif. Hubungkan endpoint backend/API
+        untuk mengaktifkan download sebenarnya.
+
+      </p>
+
+    </div>
+
+  `;
+
+}
+
+
+/* =========================================
+   DEMO DOWNLOAD
+========================================= */
+
+function demoDownload(){
+
+  toast("ℹ️ Demo mode: backend/API belum terhubung.");
+
+}
+
+
+/* =========================================
+   CLOSE MODAL
+========================================= */
+
+function closeModal(){
+
+  document.getElementById("modal").classList.remove("show");
+
+}
+
+
+/* =========================================
+   CLEAR INPUT
+========================================= */
+
+function clearInput(id){
+
+  document.getElementById(id).value = "";
+
+  toast("✓ Input dibersihkan.");
+
+}
+
+
+/* =========================================
+   HISTORY
+========================================= */
+
+function saveHistory(platform,url){
+
+  let history = JSON.parse(
+    localStorage.getItem("mypieyHistory") || "[]"
+  );
+
+
+  history.unshift({
+
+    platform:platform,
+    url:url,
+    date:new Date().toLocaleString("id-ID")
+
+  });
+
+
+  history = history.slice(0,10);
+
+
+  localStorage.setItem(
+    "mypieyHistory",
+    JSON.stringify(history)
+  );
+
+
+  renderHistory();
+
+}
+
+
+function renderHistory(){
+
+  const container =
+    document.getElementById("historyList");
+
+  let history =
+    JSON.parse(
+      localStorage.getItem("mypieyHistory") || "[]"
+    );
+
+
+  if(history.length === 0){
+
+    container.innerHTML = `
+
+      <div class="text-center py-8 text-white/30 text-sm">
+
+        Belum ada aktivitas.
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML = history.map((item,index)=>`
+
+    <div class="bg-white/5 hover:bg-white/10 transition
+                rounded-2xl p-4 flex items-center
+                justify-between gap-4">
+
+      <div class="min-w-0">
+
+        <div class="flex items-center gap-2">
+
+          <span class="text-xs font-bold text-pink-300">
+            ${escapeHtml(item.platform)}
+          </span>
+
+          <span class="text-[9px] text-white/30">
+            ${escapeHtml(item.date)}
+          </span>
+
+        </div>
+
+        <p class="text-xs text-white/50 truncate mt-1">
+          ${escapeHtml(item.url)}
+        </p>
+
+      </div>
+
+      <button
+        onclick="removeHistory(${index})"
+        class="text-white/30 hover:text-red-300">
+
+        ✕
+
+      </button>
+
+    </div>
+
+  `).join("");
+
+}
+
+
+function removeHistory(index){
+
+  let history =
+    JSON.parse(
+      localStorage.getItem("mypieyHistory") || "[]"
+    );
+
+  history.splice(index,1);
+
+  localStorage.setItem(
+    "mypieyHistory",
+    JSON.stringify(history)
+  );
+
+  renderHistory();
+
+}
+
+
+function clearHistory(){
+
+  localStorage.removeItem("mypieyHistory");
+
+  renderHistory();
+
+  toast("✓ History dibersihkan.");
+
+}
+
+
+/* =========================================
+   ESCAPE HTML
+========================================= */
+
+function escapeHtml(text){
+
+  const div = document.createElement("div");
+
+  div.textContent = text;
+
+  return div.innerHTML;
+
+}
+
+
+/* =========================================
+   SAKURA
+========================================= */
+
+function createSakura(){
+
+  const container =
+    document.getElementById("sakuraContainer");
+
+  const flower =
+    document.createElement("div");
+
+  flower.className = "sakura";
+
+  flower.innerText =
+    ["🌸","💮","✿"][Math.floor(Math.random()*3)];
+
+  flower.style.left =
+    Math.random()*100 + "vw";
+
+  flower.style.fontSize =
+    (12 + Math.random()*17) + "px";
+
+  flower.style.animationDuration =
+    (7 + Math.random()*7) + "s";
+
+  container.appendChild(flower);
+
+
+  setTimeout(()=>{
+
+    flower.remove();
+
+  },15000);
+
+}
+
+
+setInterval(createSakura,500);
+
+
+/* =========================================
+   PARTICLES
+========================================= */
+
+function createParticle(){
+
+  const particle =
+    document.createElement("div");
+
+  particle.className="particle";
+
+  particle.style.left =
+    Math.random()*100+"vw";
+
+  particle.style.animationDuration =
+    (8+Math.random()*12)+"s";
+
+  particle.style.animationDelay =
+    Math.random()*5+"s";
+
+  document.body.appendChild(particle);
+
+
+  setTimeout(()=>{
+
+    particle.remove();
+
+  },22000);
+
+}
+
+
+for(let i=0;i<18;i++){
+
+  createParticle();
+
+}
+
+
+/* =========================================
+   MUSIC
+========================================= */
+
+let music = null;
+let musicPlaying = false;
+
+function toggleMusic(){
+
+  /*
+    Tidak menggunakan autoplay audio.
+    Tambahkan URL audio milikmu sendiri di sini
+    jika memang memiliki hak untuk menggunakannya.
+  */
+
+  if(!music){
+
+    toast("🎵 Tambahkan audio milikmu sendiri di JavaScript.");
+
+    return;
+
+  }
+
+
+  if(musicPlaying){
+
+    music.pause();
+
+    musicPlaying=false;
+
+    document.getElementById("musicButton").innerText="🎵";
+
+  }else{
+
+    music.play();
+
+    musicPlaying=true;
+
+    document.getElementById("musicButton").innerText="🔊";
+
+  }
+
+}
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+renderHistory();
+
+
+/* CLOSE MODAL WHEN CLICK OUTSIDE */
+
+document.getElementById("modal").addEventListener(
+  "click",
+  function(e){
+
+    if(e.target === this){
+
+      closeModal();
+
+    }
+
+  }
+);
+
+</script>
+
+</body>
+</html>
+</API>
